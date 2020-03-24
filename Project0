@@ -1,0 +1,31 @@
+### This is the code, coded by me, to create the matrix object that will cache it's inverse. f is the variable type. 
+makeCacheMatrix <- function(x = matrix()) {
+     f <- NULL
+     set <- function(y) {
+       x <<- y
+       f <<- NULL
+     }
+     get <- function() x
+     setinverse <- function(inverse) f <<- inverse
+     getinverse <- function() f
+     list(set = set,get = get,setinverse = setinverse,getinverse = getinverse)
+}
+### This function, coded by me, to compute the inverse of the matrix that was returned by the code above. Matrix not changed.
+cacheSolve <- function(x, ...) {
+   f <- x$getinverse()
+   if(!is.null(f)) {
+          message("getting cached data")
+          return(f)
+   }
+   data <- x$get()
+   f <- solve(data,...)
+   x$setinverse(f)
+   f
+}
+
+### The code at the bottom is to test out the function, cache the inverse, and compute it on your R programming system. 
+lf <- matrix(c(1,2,3,4),2,2)
+db <- makeCacheMatrix(lf)
+cacheSolve(db)
+
+### Thanks for viewing! God Bless! Have a wonderful day!
